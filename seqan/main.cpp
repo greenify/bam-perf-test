@@ -24,6 +24,7 @@ int main(int argc, char * argv[]) {
     // Open output stream. The value "-" means reading from stdin or writing to stdout.
     BamFileOut bamFileOut(bamFileIn);
     open(bamFileOut, std::cout, Sam());
+    //open(bamFileOut, toCString(outFile));
 
     // Copy header. The header is automatically written out before the first record.
     BamHeader header;
@@ -33,12 +34,15 @@ int main(int argc, char * argv[]) {
     // BamAlignmentRecord stores one record at a time.
     BamAlignmentRecord record;
     int i = 0;
+    long l = 0;
     while (!atEnd(bamFileIn))
     {
         readRecord(record, bamFileIn);
+        l += getAlignmentLengthInRef(record);
         //writeRecord(bamFileOut, record);
         ++i;
     }
     printf("%d", i);
+    printf("%lu", l);
     return 0;
 }

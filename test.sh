@@ -8,6 +8,10 @@ if [ -z "$BAM" ] ; then
 	exit
 fi
 
+if [ -d "$DIR"/build ] ; then
+	rm -rf "$DIR"/build
+fi
+
 mkdir -p "$DIR"/build
 
 (
